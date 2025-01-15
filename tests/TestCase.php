@@ -1,29 +1,31 @@
 <?php
 
-namespace SmartCms\ViewedProducts\Tests;
+namespace SmartCms\FastOrders\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use SmartCms\ViewedProducts\ViewsServiceProvider;
+use SmartCms\FastOrders\FastOrderServiceProvider;
 
 class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
         parent::setUp();
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadMigrationsFrom(__DIR__.'/../vendor/smart-cms/store/database/migrations');
-        $this->loadMigrationsFrom(__DIR__.'/../vendor/smart-cms/core/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/smart-cms/store/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/smart-cms/core/database/migrations');
+
+        $this->artisan('migrate')->run();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'SmartCms\\ViewedProducts\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn(string $modelName) => 'SmartCms\\FastOrders\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            ViewsServiceProvider::class,
+            FastOrderServiceProvider::class,
             \SmartCms\Store\StoreServiceProvider::class,
             \SmartCms\Core\SmartCmsPanelManager::class,
             \SmartCms\Core\SmartCmsServiceProvider::class,
@@ -36,11 +38,12 @@ class TestCase extends Orchestra
         $app->singleton('_settings', function () {
             return new \SmartCms\Core\Services\Singletone\Settings;
         });
-
-        /*
-         foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/database/migrations') as $migration) {
-            (include $migration->getRealPath())->up();
-         }
-         */
+        config()->set('database.default', 'testing');
+        config()->set('database.connections.testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+        ]);
     }
 }

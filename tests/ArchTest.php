@@ -13,21 +13,21 @@ arch('models should use HasFactory trait')
     ->toUseTrait('\Illuminate\Database\Eloquent\Factories\HasFactory');
 
 arch('models should has suffix Model')
-    ->expect('\SmartCms\ViewedProducts\Models')
+    ->expect('\SmartCms\FastOrders\Models')
     ->toHaveSuffix('Model');
 
 arch('services should has service suffix')
-    ->expect('\SmartCms\ViewedProducts\Services')
+    ->expect('\SmartCms\FastOrders\Services')
     ->toHaveSuffix('Service');
 
 arch('commands should has Command suffix')
-    ->expect('\SmartCms\ViewedProducts\Commands')
+    ->expect('\SmartCms\FastOrders\Commands')
     ->toHaveSuffix('Command');
 
 arch('events should has Event suffix')
-    ->expect('\SmartCms\ViewedProducts\Events')
+    ->expect('\SmartCms\FastOrders\Events')
     ->toHaveSuffix('Event');
 
 arch('events should be invokable')
-    ->expect('\SmartCms\ViewedProducts\Events')
+    ->expect('\SmartCms\FastOrders\Events')
     ->toHaveMethod('__invoke');

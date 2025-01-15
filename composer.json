@@ -1,13 +1,14 @@
 {
-    "name": "smart-cms/viewed_products",
+    "name": "smart-cms/fast-orders",
     "version": "1.0.0",
-    "description": "This is viewed products package for smart-cms/store",
+    "description": "This is fast order package for smart-cms/store",
     "keywords": [
         "SmartCms",
         "laravel",
-        "Viewed products"
+        "Order",
+        "Fast"
     ],
-    "homepage": "https://github.com/smart-cms/viewed_products",
+    "homepage": "https://github.com/smart-cms/fast-orders",
     "license": "MIT",
     "authors": [
         {
@@ -18,9 +19,10 @@
     ],
     "require": {
         "php": "^8.3",
-        "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0",
-        "smart-cms/store": "2.x-dev"
+        "nwidart/laravel-modules": "^11.1",
+        "smart-cms/store": "2.x-dev",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
@@ -36,13 +38,13 @@
     },
     "autoload": {
         "psr-4": {
-            "SmartCms\\ViewedProducts\\": "src/",
-            "SmartCms\\ViewedProducts\\Database\\Factories\\": "database/factories/"
+            "SmartCms\\FastOrders\\": "src/",
+            "SmartCms\\FastOrders\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SmartCms\\ViewedProducts\\Tests\\": "tests/",
+            "SmartCms\\FastOrders\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -58,16 +60,17 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "SmartCms\\ViewedProducts\\ViewsServiceProvider"
+                "SmartCms\\FastOrders\\FastOrderServiceProvider"
             ],
             "aliases": {
-                "ViewedProducts": "SmartCms\\ViewedProducts\\Facades\\Views"
+                "FastOrders": "SmartCms\\FastOrders\\Facades\\Views"
             }
         }
     },
