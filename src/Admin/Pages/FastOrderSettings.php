@@ -35,7 +35,7 @@ class FastOrdersSettings extends BaseSettings
     public function schema(): array|Closure
     {
       return [
-         Repeater::make('fields')
+         Repeater::make('fastorder.fields')
                 ->label('Fields')
                 ->schema([
                     Select::make('field_id')
@@ -45,11 +45,11 @@ class FastOrdersSettings extends BaseSettings
                 ])
                 ->required(),
 
-            Toggle::make('send_notification')
+            Toggle::make('fastorder.send_notification')
                 ->label('Send Notification to Admin')
                 ->default(false),
 
-            Select::make('default_order_status')
+            Select::make('fastorder.default_order_status')
                 ->label('Default Order Status')
                 ->options(OrderStatus::pluck('name', 'id')->toArray())
                 ->required()
