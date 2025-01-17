@@ -36,7 +36,7 @@ class FastOrderResource extends Resource
                ->sortable(),
             Tables\Columns\SelectColumn::make('orderStatusId.name')
                ->label('Order Status')
-               ->options(OrderStatus::pluck('name', 'id'))
+               ->options(OrderStatus::query()->pluck('name', 'id'))
                ->sortable(),
             Tables\Columns\TextColumn::make('created_at')
                ->label('Created At')
@@ -50,7 +50,7 @@ class FastOrderResource extends Resource
          ->filters([
             Tables\Filters\SelectFilter::make('order_status')
                ->label('Order Status')
-               ->options(OrderStatus::pluck('name', 'id')),
+               ->options(OrderStatus::query()->pluck('name', 'id')),
             Tables\Filters\SelectFilter::make('product')
                ->label('Product')
                ->options(FastOrder::distinct('product_id')->pluck('product.name', 'product_id'))
