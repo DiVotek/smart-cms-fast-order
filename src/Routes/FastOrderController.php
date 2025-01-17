@@ -25,7 +25,7 @@ class FastOrderController
 
         $fastOrder = FastOrder::create([
             'product_id' => $request->product_id,
-            'order_status_id' => OrderStatus::all()->first(),
+            'order_status_id' => OrderStatus::query()->first(),
             'data' => $request->data,
         ]);
 

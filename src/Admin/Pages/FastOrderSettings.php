@@ -51,7 +51,7 @@ class FastOrdersSettings extends BaseSettings
 
             Select::make('default_order_status')
                 ->label('Default Order Status')
-                ->options(OrderStatus::all()->pluck('name', 'id')->toArray())
+                ->options(OrderStatus::pluck('name', 'id')->toArray())
                 ->required()
                 ->default(OrderStatus::first()->id),
       ];

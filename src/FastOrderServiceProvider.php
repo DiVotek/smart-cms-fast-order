@@ -11,6 +11,7 @@ class FastOrderServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
         Event::listen('cms.admin.navigation.resources', Resources::class);
         Event::listen('cms.admin.navigation.settings_pages', SettingsPages::class);
     }

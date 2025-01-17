@@ -14,7 +14,7 @@ class FastOrderFactory extends Factory
    {
       return [
          'product_id' => \SmartCms\Store\Database\Factories\ProductFactory::new()->state(['status' => 1])->create()->id,
-         'order_status_id' => OrderStatus::all()->first(),
+         'order_status_id' => OrderStatus::query()->first(),
          'data' => $this->faker->randomElements(['key' => 'value', 'another_key' => 'another_value']),
       ];
    }

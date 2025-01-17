@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartCms\FastOrders\Admin\FastOrderResource\Pages;
+namespace SmartCms\FastOrders\Admin\Resources\FastOrderResource\Pages;
 
 use Filament\Resources\Pages\ListRecords;
 use SmartCms\FastOrders\Admin\Resources\FastOrderResource;

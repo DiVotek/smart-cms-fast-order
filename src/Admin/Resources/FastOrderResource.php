@@ -10,11 +10,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Table;
-use SmartCms\FastOrders\Admin\FastOrderResource\Pages\ListFastOrders;
-use SmartCms\FastOrders\Admin\FastOrderResource\Pages\ViewFastOrder;
+use SmartCms\FastOrders\Admin\Resources\FastOrderResource\Pages\ListFastOrders;
 use SmartCms\FastOrders\Models\FastOrder;
 use SmartCms\Store\Models\OrderStatus;
-use SmartCms\Store\Models\Product;
 
 class FastOrderResource extends Resource
 {
@@ -38,7 +36,7 @@ class FastOrderResource extends Resource
                ->sortable(),
             Tables\Columns\SelectColumn::make('orderStatusId.name')
                ->label('Order Status')
-               ->options(OrderStatus::all()->pluck('name', 'id'))
+               ->options(OrderStatus::pluck('name', 'id'))
                ->sortable(),
             Tables\Columns\TextColumn::make('created_at')
                ->label('Created At')
@@ -52,7 +50,7 @@ class FastOrderResource extends Resource
          ->filters([
             Tables\Filters\SelectFilter::make('order_status')
                ->label('Order Status')
-               ->options(OrderStatus::all()->pluck('name', 'id')),
+               ->options(OrderStatus::pluck('name', 'id')),
             Tables\Filters\SelectFilter::make('product')
                ->label('Product')
                ->options(FastOrder::distinct('product_id')->pluck('product.name', 'product_id'))
