@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use SmartCms\FastOrders\Admin\Resources\FastOrderResource\Pages\ListFastOrders;
 use SmartCms\FastOrders\Models\FastOrder;
 use SmartCms\Store\Models\OrderStatus;
+use SmartCms\Store\Models\Product;
 
 class FastOrderResource extends Resource
 {
@@ -53,7 +54,7 @@ class FastOrderResource extends Resource
                ->options(OrderStatus::query()->pluck('name', 'id')),
             Tables\Filters\SelectFilter::make('product')
                ->label('Product')
-               ->options(FastOrder::distinct('product_id')->pluck('product.name', 'product_id'))
+               ->options(Product::query()->whereIn('id', FastOrder::query()->distinct('product_id')->pluck('product_id'))->pluck('name', 'id'))
          ])
          ->actions([
             ViewAction::make()
@@ -69,19 +70,19 @@ class FastOrderResource extends Resource
                                  ->default($record->id)
                                  ->required()
                                  ->disabled(),
-                                 TextInput::make('Product Name')
+                              TextInput::make('Product Name')
                                  ->default($record->product->name)
                                  ->required()
                                  ->disabled(),
-                                 TextInput::make('Status')
+                              TextInput::make('Status')
                                  ->default($record->orderStatusId->name)
                                  ->required()
                                  ->disabled(),
-                                 TextInput::make('Created At')
+                              TextInput::make('Created At')
                                  ->default($record->created_at->toFormattedDateString())
                                  ->required()
                                  ->disabled(),
-                                 TextInput::make('Updated At')
+                              TextInput::make('Updated At')
                                  ->default($record->updated_at->toFormattedDateString())
                                  ->required()
                                  ->disabled(),
