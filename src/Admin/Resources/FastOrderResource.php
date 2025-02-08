@@ -19,7 +19,7 @@ class FastOrderResource extends Resource
 {
    protected static ?string $model = FastOrder::class;
 
-   protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+   protected static ?string $navigationIcon = null;
 
    public static function getNavigationGroup(): ?string
    {

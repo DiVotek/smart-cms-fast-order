@@ -18,8 +18,10 @@ class ListFastOrders extends ListRecords
    protected function getHeaderActions(): array
    {
       return [
+         Action::make('help')->help('fast order help'),
          Action::make('settings')
             ->label('Settings')
+            ->settings()
             ->form([
                Select::make('fastorder.default_order_status')
                   ->label(__('fast-orders::trans.default_order_status'))
