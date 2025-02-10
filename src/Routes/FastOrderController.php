@@ -67,7 +67,10 @@ class FastOrderController
         $fields = ['class' => '', 'fields' => $fields];
         return new ScmsResponse(
             data: [
-                'fields' => [$fields],
+                'groups' => [
+                    'class' => '',
+                    'fields' => [$fields],
+                ],
             ],
         );
     }
