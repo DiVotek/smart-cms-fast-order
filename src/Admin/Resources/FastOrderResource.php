@@ -6,6 +6,8 @@ use Filament\Forms;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\KeyValueEntry;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ViewAction;
@@ -61,39 +63,22 @@ class FastOrderResource extends Resource
                ->label('View')
                ->modalHeading('Fast Order Details')
                ->modalWidth('lg')
-               ->action(function (FastOrder $record) {
-                  return [
-                     'form' => [
-                        Section::make('Order Details')
-                           ->schema([
-                              TextInput::make('Order ID')
-                                 ->default($record->id)
-                                 ->required()
-                                 ->disabled(),
-                              TextInput::make('Product Name')
-                                 ->default($record->product->name)
-                                 ->required()
-                                 ->disabled(),
-                              TextInput::make('Status')
-                                 ->default($record->orderStatusId->name)
-                                 ->required()
-                                 ->disabled(),
-                              TextInput::make('Created At')
-                                 ->default($record->created_at->toFormattedDateString())
-                                 ->required()
-                                 ->disabled(),
-                              TextInput::make('Updated At')
-                                 ->default($record->updated_at->toFormattedDateString())
-                                 ->required()
-                                 ->disabled(),
-                              KeyValue::make('Data')
-                                 ->keyPlaceholder('Key')
-                                 ->valuePlaceholder('Value')
-                                 ->default($record->data),
-                           ])
-                           ->columns(1),
-                     ]
-                  ];
+               ->infolist(function ($infolist) {
+                  return $infolist->schema([
+                     TextEntry::make('product.name')
+                        ->label('Product Name'),
+                     TextEntry::make('orderStatusId.name')
+                        ->label('Order Status'),
+                     TextEntry::make('created_at')
+                        ->label('Created At'),
+                     TextEntry::make('updated_at')
+                        ->label('Updated At'),
+                     KeyValueEntry::make('data')
+                        ->label('Data')
+                        ->columnSpanFull()
+                        ->keyLabel(null)
+                        ->valueLabel(null),
+                  ])->columns(2);
                })
          ]);
    }

@@ -35,10 +35,17 @@ class FastOrderController
         if ($validator->fails()) {
             return new ScmsResponse(false, [], $validator->errors()->toArray());
         }
+        $data = [];
+        foreach ($request->except(['_token', 'product_id']) as $key => $value) {
+            $field = Field::query()->where('html_id', $key)->first();
+            if ($field) {
+                $data[$field->name] = $value;
+            }
+        }
         FastOrder::query()->create([
             'product_id' => $request->product_id,
             'order_status_id' => OrderStatus::query()->first()->id ?? 0,
-            'data' => $request->except('product_id'),
+            'data' => $data,
         ]);
 
         return new ScmsResponse();
