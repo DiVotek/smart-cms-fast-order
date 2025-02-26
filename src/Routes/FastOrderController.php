@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use SmartCms\Core\Models\Field;
 use SmartCms\Core\Repositories\Field\FieldRepository;
 use SmartCms\Core\Services\ScmsResponse;
+use SmartCms\Core\Services\UserNotification;
 use SmartCms\FastOrders\Models\FastOrder;
 use SmartCms\Store\Models\OrderStatus;
 use SmartCms\Store\Models\Product;
@@ -47,6 +48,14 @@ class FastOrderController
             'order_status_id' => OrderStatus::query()->first()->id ?? 0,
             'data' => $data,
         ]);
+        $userNotification = setting('fastorder.user_notification', []);
+        $notification = $userNotification[current_lang()] ?? $userNotification['default'] ?? '';
+        if ($notification) {
+            UserNotification::make()
+                ->title($notification)
+                ->success()
+                ->send();
+        }
 
         return new ScmsResponse();
     }
@@ -65,11 +74,14 @@ class FastOrderController
             $fields[] = FieldRepository::make()->find($field->id)->get();
         }
         $fields = ['class' => '', 'fields' => $fields];
+        $buttonName = setting('fastorder.form_button', []);
+        $button_name = $buttonName[current_lang()] ?? $buttonName['default'] ?? '';
         return new ScmsResponse(
             data: [
                 'groups' => [
                     $fields,
-                ]
+                ],
+                'button_name' => $button_name
             ],
         );
     }

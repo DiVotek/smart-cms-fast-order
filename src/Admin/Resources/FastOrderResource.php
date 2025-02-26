@@ -2,14 +2,11 @@
 
 namespace SmartCms\FastOrders\Admin\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Components\KeyValue;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\KeyValueEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Table;
 use SmartCms\FastOrders\Admin\Resources\FastOrderResource\Pages\ListFastOrders;
@@ -22,6 +19,11 @@ class FastOrderResource extends Resource
    protected static ?string $model = FastOrder::class;
 
    protected static ?string $navigationIcon = null;
+
+   public static function getNavigationBadge(): ?string
+   {
+      return static::getModel()::count();
+   }
 
    public static function getNavigationGroup(): ?string
    {
@@ -79,7 +81,8 @@ class FastOrderResource extends Resource
                         ->keyLabel(null)
                         ->valueLabel(null),
                   ])->columns(2);
-               })
+               }),
+            DeleteAction::make()
          ]);
    }
 

@@ -8,6 +8,7 @@ use Illuminate\View\Compilers\BladeCompiler;
 use SmartCms\FastOrders\Admin\Actions\Navigation\Pages;
 use SmartCms\FastOrders\Admin\Actions\Navigation\Resources;
 use SmartCms\FastOrders\Components\FastOrder;
+use SmartCms\FastOrders\Events\ProductEntityTransform;
 
 class FastOrderServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,7 @@ class FastOrderServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'fast-orders');
         Event::listen('cms.admin.navigation.resources', Resources::class);
         Event::listen('cms.admin.navigation.settings_pages', Pages::class);
+        Event::listen('cms.product-entity.transform', ProductEntityTransform::class);
     }
 
     public function boot()
