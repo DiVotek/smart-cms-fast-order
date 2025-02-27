@@ -3,6 +3,7 @@
 namespace SmartCms\FastOrders\Routes;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use SmartCms\Core\Models\Field;
 use SmartCms\Core\Repositories\Field\FieldRepository;
@@ -49,13 +50,18 @@ class FastOrderController
             'data' => $data,
         ]);
         $userNotification = setting('fastorder.user_notification', []);
-        $notification = $userNotification[current_lang()] ?? $userNotification['default'] ?? '';
+        if (is_multi_lang()) {
+            $notification = $userNotification[current_lang()] ?? $userNotification['default'] ?? '';
+        } else {
+            $notification = $userNotification['default'] ?? '';
+        }
         if ($notification) {
             UserNotification::make()
                 ->title($notification)
                 ->success()
                 ->send();
         }
+        dd(Session::get('notifications', []));
 
         return new ScmsResponse();
     }
