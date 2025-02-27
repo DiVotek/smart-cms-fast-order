@@ -61,7 +61,6 @@ class FastOrderController
                 ->success()
                 ->send();
         }
-        dd(Session::get('notifications', []));
 
         return new ScmsResponse();
     }
