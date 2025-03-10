@@ -18,7 +18,7 @@ class FastOrderServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'fast-orders');
         Event::listen('cms.admin.navigation.resources', Resources::class);
-        Event::listen('cms.admin.navigation.settings_pages', Pages::class);
+        // Event::listen('cms.admin.navigation.settings_pages', Pages::class);
         Event::listen('cms.product-entity.transform', ProductEntityTransform::class);
     }
 
