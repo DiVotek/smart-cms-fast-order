@@ -11,7 +11,7 @@ class FastOrder extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'order_status_id', 'data'];
+    protected $guarded = [];
 
     protected $casts = [
         'data' => 'array',
@@ -19,11 +19,11 @@ class FastOrder extends BaseModel
 
     public function product()
     {
-      return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function orderStatusId()
     {
-      return $this->belongsTo(OrderStatus::class, 'order_status_id');
+        return $this->belongsTo(OrderStatus::class, 'order_status_id');
     }
 }

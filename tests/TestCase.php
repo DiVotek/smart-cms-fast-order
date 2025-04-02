@@ -12,8 +12,8 @@ class TestCase extends Orchestra
     {
         parent::setUp();
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->loadMigrationsFrom(__DIR__ . '/../vendor/smart-cms/store/database/migrations');
-        $this->loadMigrationsFrom(__DIR__ . '/../vendor/smart-cms/core/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/smart-cms/store/database/new_migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/smart-cms/core/database/new_migrations');
 
         $this->artisan('migrate')->run();
 

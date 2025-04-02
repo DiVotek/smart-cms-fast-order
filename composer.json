@@ -19,9 +19,8 @@
     ],
     "require": {
         "php": "^8.3",
-        "illuminate/contracts": "^10.0||^11.0",
         "nwidart/laravel-modules": "^11.1",
-        "smart-cms/store": "2.x-dev",
+        "smart-cms/store": "dev-refactor",
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {

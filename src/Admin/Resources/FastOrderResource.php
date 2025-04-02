@@ -20,6 +20,8 @@ class FastOrderResource extends Resource
 
     protected static ?string $navigationIcon = null;
 
+    public static ?int $navigationSort = 3;
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
@@ -91,5 +93,10 @@ class FastOrderResource extends Resource
         return [
             'index' => ListFastOrders::route('/'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }

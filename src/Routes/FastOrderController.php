@@ -46,7 +46,7 @@ class FastOrderController
         }
         FastOrder::query()->create([
             'product_id' => $request->product_id,
-            'order_status_id' => OrderStatus::query()->first()->id ?? 0,
+            'order_status_id' => OrderStatus::query()->where('is_default', 1)->first()->id ?? 0,
             'data' => $data,
         ]);
         $userNotification = setting('fastorder.user_notification', []);
